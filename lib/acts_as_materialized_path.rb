@@ -17,7 +17,7 @@ module ActiveRecord #:nodoc:
       class DestroyNotLeaf < TypeError
       end
 
-      def self.included(base)
+      def self.included(base) # :nodoc:
         base.extend(ClassMethods)
       end
 
@@ -241,23 +241,20 @@ module ActiveRecord #:nodoc:
           return nextval
         end
 
-        #
-        def save
+        # :nodoc:
+        def save(*args)
           if new_record? && !the_path
             handle_new_record_code
-            super
-          else
-            super
           end
+          super args
         end
-        
+
+        # :nodoc:        
         def save!
           if new_record? && !the_path
             handle_new_record_code
-            super
-          else
-            super
           end
+          super
         end
 
         def handle_new_record_code
